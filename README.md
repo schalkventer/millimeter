@@ -1,9 +1,9 @@
 # 📏 Millimeter
 
-A stupidly small node-based, serverless-CMS static site framework.
+A stupidly small component-driven, node-based, serverless-CMS static site framework.
 
 ## Dependancies
-- Eleventy: To create HTML files.
-- Serve: To spin up a local dev server.
-- Parcel: To preprocess all assets.
-- Netlify CMS: To create the serverless CMS dashboard.
+- [Eleventy](https://www.11ty.io/): To create HTML files.
+- [Serve](https://www.npmjs.com/package/serve): To spin up a local dev server.
+- [Parcel](https://parceljs.org/): To preprocess all assets.
+- [Netlify CMS](https://www.netlifycms.org/): To create the serverless CMS dashboard.
