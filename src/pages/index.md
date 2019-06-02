@@ -1,7 +1,6 @@
 ---
-layout: src/components/Homepage
---
+layout: index.njk
+title: Hello World
+---
 
-# Millimeter
-
-A stupidly small node-based, serverless-CMS static site framework
+# Hello
