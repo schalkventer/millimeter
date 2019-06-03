@@ -1,7 +1,6 @@
 ---
-layout: src/components/Homepage
---
+layout: index.11ty.js
+title: Hello World
+---
 
-# Millimeter
-
-A stupidly small node-based, serverless-CMS static site framework
+# Hello
