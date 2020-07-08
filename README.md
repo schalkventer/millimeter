@@ -1,5 +1,7 @@
 # 📏 Millimeter
 
+*⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/millimeter) ⭐️*
+
 A stupidly small component-driven, node-based, serverless-CMS static site framework.
 
 ## Dependancies
