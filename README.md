@@ -2,7 +2,7 @@
 
 *⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/millimeter) ⭐️*
 
-# A 100 LOC anti-framework
+**A 100 LOC anti-framework**
 
 Simply copy-and-paste the following into a JavaScript file:
 
