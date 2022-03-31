@@ -4,6 +4,12 @@
 
 **An insanely small 96-LOC anti-framework**
 
+## Examples
+
+- [Yet Another Todo App](/schalkventer/millimeter/yata)
+
+## Usages
+
 Simply copy-and-paste the following into a JavaScript file:
 
 ```js
