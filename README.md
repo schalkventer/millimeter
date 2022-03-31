@@ -2,7 +2,7 @@
 
 *⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/millimeter) ⭐️*
 
-**An insanely small 96-line anti-framework**
+**An insanely simple 96-line anti-framework**
 
 ## Examples
 
