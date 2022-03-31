@@ -10,101 +10,97 @@ Simply copy-and-paste the following into a JavaScript file:
 export const html = (staticArray, ...dynamic) => {
   const stringArray = staticArray || [];
   const array = (dynamic || []).map((singleDynamic, index) => {
-    return `${stringArray[index] || ""}${singleDynamic || ""}`;
+    const singleDynamicString = Array.isArray(singleDynamic) ? singleDynamic.join('') : singleDynamic
+    return `${stringArray[index] || ""}${singleDynamicString || ""}`;
   });
 
   const lastIndexStatic = stringArray.length - 1;
   return `${array.join("")}${stringArray[lastIndexStatic]}`;
 };
 
+/** @param {Record<string, boolean>} conditions */
+export const classList = (conditions) => {
+  const keys = Object.keys(conditions)
+  const map = (isValid, index) => isValid && keys[index]
+  return Object.values(conditions).map(map).filter(Boolean).join(' ')
+}
+
+export const calcView = () => {
+  const array = window.location.hash.slice(1).split('/').filter(Boolean)
+  const composites = array.reduce((result, value) => [`${result[0]}-${value}`, ...result], ['app-view'])
+
+  const componentName = composites.reduce(
+    (result, name) => result || !window.customElements.get(name) ? result : name, 
+    null
+  )
+
+  return [componentName, array]
+}
+
 /**
- * @param {string} name
- * @param {Record<string, Record<string, (elements: Record<string, HTMLElement>, dispatch: (type: string, payload: Record<string, any>) => void | Promise<void>)} handlers
+ * @property {{Record<string, Record<string, (event: Event) => void | Promise<void>>>}} handlers
+ * @property {{Record<string, HTMLElement[]>}} elements
+ * @property {string[]} listeners
+ * @property {() => string} render
+ * @property {(type: string, any) => void} dispatch
  */
-export const createComponent = (name, init, handlers = {}) => {
-  if (!name) throw new Error('"name" is required');
+export class Millimeter extends HTMLElement {
+  shadow = this.attachShadow({ mode: 'closed' })
+  render = () => { throw new Error('"render" method is required') }
 
-  if (!/\-/.test(name))
-    throw new Error('"name" requires a hypen ("-") in the value.');
-
-  const elementsList = Object.keys(handlers).filter(value => value !== 'root');
-
-  const elementsEventObj = elementsList.reduce((result, elementName) => {
-    return {
-      ...result,
-      ...handlers[elementName],
-    };
-  }, {});
-
-  const eventsList = Object.keys(elementsEventObj);
-
-  class Component extends HTMLElement {
-    shadow = this.attachShadow({ mode: "closed" });
-
-    elements = {
-      root: this.shadow,
-    };
-
-    constructor() {
-      super();
-    }
-
-    dispatch = (type, payload) => {
-      this.dispatchEvent(
-        new CustomEvent(type, {
-          composed: true,
-          bubbles: true,
-          cancelable: true,
-          detail: payload,
-        })
-      );
-    };
-
-    handlerWrapper = (event) => {
-      const { target, type } = event;
-      const { dataset = {} } = target || {};
-      const { key } = dataset;
-      const element = handlers[key] || {};
-      const callback = element[type];
-
-      if (!key || !callback) return;
-      callback(this.elements, this.dispatch);
-    }
-
-    connectedCallback() {
-      this.shadow.innerHTML = init(this);
-
-      const keyNodes = Array.from(this.shadow.querySelectorAll('[data-key]'))
-
-      this.elements = keyNodes.reduce((result, node) => {
-        const { key } = node.dataset
-
-        return {
-          ...result,
-          [key]: node,
-        };
-      }, { root: this.shadow });
-
-      if (handlers.root && handlers.root.connect) {
-        handlers.root.connect(this.elements, this.dispatch)
-      }
-
-      eventsList.forEach((eventType) => {
-        this.shadow.addEventListener(eventType, this.handlerWrapper);
-      });
-    }
-
-    disconnectedCallback() {
-      if (handlers.root && handlers.root.disconnect) {
-        handlers.root.disconnect(this.elements, this.dispatch)
-      }
-
-      eventsList.forEach((eventType) => {
-        this.shadow.removeEventListener(eventType, this.handlerWrapper);
-      });
-    }
+  /** @param {Record<string, Record<string, (event: Event) => void | Promise<void>>>} [handlers] */
+  constructor(handlers) {
+    super()
+    this.handlers = handlers || {}
   }
 
-  customElements.define(name, Component);
-};
+  dispatch = (type, payload) => {
+    this.dispatchEvent(
+      new CustomEvent(type, {
+        composed: true,
+        bubbles: true,
+        cancelable: true,
+        detail: payload,
+      })
+    );
+  };
+
+  callHandler = (event) => {
+    if (event.type === 'submit') event.preventDefault()
+
+    event.path.forEach(node => {
+      const key = node.getAttribute && node.getAttribute('key')
+      if (!key || !this.handlers[key] || !elementHandlers[event.type]) return
+      elementHandlers[event.type](event)
+    })
+  }
+
+  connectedCallback() {
+    let listeners = []
+    this.shadow.innerHTML = `<style>* { box-sizing: border-box }</style> ${this.render()}`
+
+    const elements = Array
+      .from(this.shadow.querySelectorAll('[key]'))
+      .reduce((result, node) => ({...result, [node.getAttribute('key')]: node }), {})
+
+    Object.keys(elements).forEach((result, key) => {
+      if (!this.handlers[key]) return
+
+      Object.keys().forEach((innerKey) => {
+        if (result.includes(innerKey)) return
+        this.listeners.push(innerKey)
+      })
+    })
+
+    this.elements = elements
+    this.listeners = listeners
+    if (this.handlers.host && this.handlers.host.mount) this.handlers.host.mount(new Event('mount'))
+    this.listeners.forEach((type) => this.shadow.addEventListener(type, this.callHandler))
+  }
+
+  disconnectedCallback() {
+    if (this.handlers.host && this.handlers.host.unmount) this.handlers.host.mount(new Event('unmount'))
+    this.listeners.forEach((type) => this.shadow.addEventListener(type, this.callHandler))
+  }
+}
 ```
