@@ -2,7 +2,7 @@
 
 *⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/millimeter) ⭐️*
 
-**An insanely simple 96-line anti-framework**
+**An super-basic, 96 LOC anti-framework**
 
 ## Examples
 
