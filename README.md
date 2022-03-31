@@ -8,7 +8,7 @@
 
 - [Yet Another Todo App](/schalkventer/millimeter/yata)
 
-## Usages
+## Code
 
 Simply copy-and-paste the following into a JavaScript file:
 
