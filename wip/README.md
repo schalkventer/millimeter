@@ -1,3 +1,18 @@
+# 📏 Millimeter
+
+*⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/millimeter) ⭐️*
+
+**An super-basic, 96 line, anti-framework**
+
+## Examples
+
+- [Yet Another Todo App](/schalkventer/millimeter/yata)
+
+## Code
+
+Simply copy-and-paste the following into a JavaScript file:
+
+```js
 export const html = (staticArray, ...dynamic) => {
   const stringArray = staticArray || [];
   
@@ -94,3 +109,17 @@ export class Millimeter extends HTMLElement {
     this.listeners.forEach((type) => this.shadow.addEventListener(type, this.callHandler))
   }
 }
+```
+
+## API
+
+Millimeter makes a clear mental seperation between the following phases:
+- The construction of the initial component state in the mount method
+- -
+
+initial component construction, based on a string returned by the `mount
+
+
+
+- The `render` method only runs once and returns a string to build all HTML/inline CSS.
+- Attributes on the host are only used once when the component mounts to create props on the host.

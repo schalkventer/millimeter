@@ -1,0 +1,28 @@
+{
+  "tags": [{
+    "name": "template-list",
+    "description": "Creates a single item in the todo app list",
+    "attributes": [
+        {
+        "name": "data-completed",
+        "description": "Whether task has been completed yet",
+        "type": "boolean",
+        "default": false
+      },
+
+      {
+        "name": "data-title",
+        "description": "The title assigned with the task",
+        "type": "string",
+        "default": "Create an example project"
+      },
+
+      {
+        "name": "data-scheduled",
+        "description": "A specific date associated with task, accepts any string that can be parsed by the JavaScript date constructor.",
+        "type": "string",
+        "default": "10-10-2090"
+      }
+    ]
+  }]
+}

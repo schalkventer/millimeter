@@ -1,0 +1,81 @@
+:root {
+    --color-blue: 0, 110, 230;
+    --color-navy: 25, 25, 60;
+    --color-white: 255, 255, 255;
+    
+    --opacity-none: 0;
+    --opacity-subtle: 0.025;
+    --opacity-muted: 0.1;
+    --opacity-medium: 0.5;
+    --opacity-strong: 0.75;
+    --opacity-crisp: 0.9;
+    --opacity-solid: 1;
+    
+    --size-none: 0;
+    --size-xs: 1rem;
+    --size-s: 1.5rem;
+    --size-m: 4rem;
+    --size-l: 8rem;
+    --size-xl: 50rem;
+    --size-full: 100%;
+
+    --spacing-none: 0;
+    --spacing-xs: 0.25rem;
+    --spacing-s: 0.5rem;
+    --spacing-m: 1rem;
+    --spacing-l: 1.5rem;
+    --spacing-xl: 3rem;
+  
+    --font-s: normal normal 600 0.9rem/1.5 "Nunito", "Arial", "Helvetica", sans-serif;
+    --font-m: normal normal 600 1rem/1 "Nunito", "Arial", "Helvetica", sans-serif;
+    --font-l: normal normal 600 1.25rem/1 "Nunito", "Arial", "Helvetica", sans-serif;
+    --font-xl: normal normal 900 2.5rem/0.9 "Nunito", "Arial", "Helvetica", sans-serif;
+    --font-xxl: normal normal 900 3rem/0.9 "Nunito", "Arial", "Helvetica", sans-serif;
+    
+    --font-spacing-s: 0.01rem
+    --font-spacing-m: -0.01rem;
+    --font-spacing-l: -0.01rem;
+    --font-spacing-xl: -0.025rem;
+    --font-spacing-xxl: -0.05rem
+      
+    --radius-none: 0;
+    --radius-subtle: 4px;
+    --radius-medium: 8px;
+    --radius-strong: 16px;
+    --radius-pill: 100px;
+    --radius-circle: 50%;
+    
+    --shadow-none: none;
+    
+    --shadow-medium:
+      0px 1px 5px 0px rgba(0, 0, 0, 0.12),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+      0px 3px 1px -2px rgba(0, 0, 0, 0.2);
+    
+    --shadow-strong: 
+      0 19px 38px rgb(0 0 0 / 30%), 
+      0 15px 12px rgb(0 0 0 / 22%);
+}
+
+* { 
+    box-sizing: border-box
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url("/assets/fonts/nunito-700.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url("/assets/fonts/nunito-900.ttf");
+  font-weight: 900;
+}
+
+body {
+    margin: var(--spacing-none);
+    font: var(--font-m);
+    letter-spacing: var(--font-spacing-m);
+    color: rgba(var(--color-navy), var(--opacity-crisp));
+}

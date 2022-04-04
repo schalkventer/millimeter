@@ -1,0 +1,22 @@
+{
+  "tags": [{
+    "name": "element-button",
+    "description": "Creates a button that either navigates to a different view or triggers a JavaScript action",
+    "slot": "Click me!",
+    "attributes": [
+        {
+        "name": "data-importance",
+        "description": "Determines the visual salience of the button",
+        "values": [{ "name": "secondary" }, { "name": "primary" }],
+        "default": "secondary"
+      },
+
+      {
+        "name": "data-theme",
+        "description": "If button is used over a dark background the this should be set to 'dark'",
+        "values": [{ "name": "light" }, { "name": "dark" }],
+        "default": "light"
+      }
+    ]
+  }]
+}
